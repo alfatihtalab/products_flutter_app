@@ -1,6 +1,6 @@
 # products_test_app
 
-A simple products app using an API using Flask-App
+A simple products app using an rest API Flask-App
 [source code @github]
 https://github.com/alfatihtalab/product_rest_api
 
@@ -17,7 +17,7 @@ header: ["Content-Type": "application/json"]
 
 
 
-1. This app used IMEI code of device, as user ID to write an user ID to the database
+1. This app used IMEI code of device, as user ID to write it into the database.
 2. Fetching all product in the database using Future, Async, Await
 3. Posting orders to the database belongs to the user ID
 4. Pet all the orders belongs to the user ID
