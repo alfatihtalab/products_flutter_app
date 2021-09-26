@@ -17,9 +17,9 @@ header: ["Content-Type": "application/json"]
 
 
 
-1. This app used IMEI code of device, as user ID to write the database
+1. This app used IMEI code of device, as user ID to write an user ID to the database
 2. Fetching all product in the database using Future, Async, Await
-3. Posting orders to the database
+3. Posting orders to the database belongs to the user ID
 4. Pet all the orders belongs to the user ID
 
 
