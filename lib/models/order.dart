@@ -1,36 +1,8 @@
 // To parse this JSON data, do
 //
-//     final order = orderFromJson(jsonString);
+//     final orders = ordersFromJson(jsonString);
 
 import 'dart:convert';
-
-Order orderFromJson(String str) => Order.fromJson(json.decode(str));
-
-String orderToJson(Order data) => json.encode(data.toJson());
-
-class Order {
-  Order({
-    required this.userId,
-    required this.productId,
-    required this.productCount,
-  });
-
-  String userId;
-  String productId;
-  int productCount;
-
-  factory Order.fromJson(Map<String, dynamic> json) => Order(
-        userId: json["user_id"],
-        productId: json["product_id"],
-        productCount: json["product_count"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "user_id": userId,
-        "product_id": productId,
-        "product_count": productCount,
-      };
-}
 
 Orders ordersFromJson(String str) => Orders.fromJson(json.decode(str));
 
@@ -49,5 +21,41 @@ class Orders {
 
   Map<String, dynamic> toJson() => {
         "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
+      };
+}
+
+Order orderFromJson(String str) => Order.fromJson(json.decode(str));
+
+String orderToJson(Order data) => json.encode(data.toJson());
+
+class Order {
+  Order({
+    required this.id,
+    required this.productCount,
+    required this.productId,
+    required this.productPrice,
+    required this.userId,
+  });
+
+  int id;
+  int productCount;
+  String productId;
+  double productPrice;
+  String userId;
+
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
+        id: json["id"],
+        productCount: int.parse(json["product_count"]),
+        productId: json["product_id"],
+        productPrice: json["product_price"],
+        userId: json["user_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "product_count": productCount,
+        "product_id": productId,
+        "product_price": productPrice,
+        "user_id": userId,
       };
 }

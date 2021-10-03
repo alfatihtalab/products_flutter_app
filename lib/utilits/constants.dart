@@ -1,1 +1,1 @@
-const String mainUrl = 'https://products-flutter-rest-api.herokuapp.com';
+const String mURL = 'https://products-flutter-rest-api.herokuapp.com';

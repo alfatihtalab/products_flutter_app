@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:products_test_app/models/product.dart';
 import 'package:products_test_app/models/user.dart';
-import 'package:products_test_app/screens/order_page.dart';
 import 'package:products_test_app/screens/products_page.dart';
+import 'package:products_test_app/utilits/constants.dart';
 import 'package:unique_identifier/unique_identifier.dart';
 
 void main() {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       home: const MyHomePage(title: 'Flutter Demo Product List'),
     );
@@ -86,17 +86,23 @@ class _MyHomePageState extends State<MyHomePage> {
   //to init user using an ID to checking status (new or old)
   //at the database
   Future<void> initUser(String id) async {
-    var url = Uri.parse('https://products-flutter-rest-api.herokuapp.com/user');
+    var url = Uri.parse(mURL + '/user');
     try {
-      var uriResponse = await http.post(url,
+      var uriResponseGet = await http.get(url);
+      print(uriResponseGet.body);
+      var uriResponsePost = await http.post(url,
           body: userToJson(User(id: id)),
           headers: {"Content-Type": "application/json"});
-      print(uriResponse.body);
-      print(uriResponse.statusCode);
+      print(uriResponsePost.body);
+      print(uriResponsePost.statusCode);
     } catch (e) {
       print(e.toString());
     }
   }
+
+  //check the user in database
+
+  // Future<void> checkUser(String id) async {}
 
   void _getImeiNumber() {}
 
@@ -114,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      backgroundColor: Colors.white70,
       body: (_identifier == 'Unknown')
           ? const Center(
               child: Text(
@@ -147,14 +154,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: CircularProgressIndicator(),
                 );
               }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (countext) {
-            return OrderPage(userId: _identifier);
-          }));
-        },
-        child: const Icon(Icons.add_shopping_cart),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
